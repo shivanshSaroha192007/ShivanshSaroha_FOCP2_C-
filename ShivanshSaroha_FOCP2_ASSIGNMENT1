@@ -1,0 +1,265 @@
+Q1.cpp
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+bool isPrime(int n) {
+    if (n <= 1) return false;
+    for (int i = 2; i <= sqrt(n); ++i) {
+        if (n % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void findFactors(int n) {
+    cout << "Factors of " << n << " are: ";
+    for (int i = 1; i <= n; ++i) {
+        if (n % i == 0) {
+            cout << i << " ";
+        }
+    }
+    cout << endl;
+}
+
+int nextPrime(int n) {
+    int next = n + 1;
+    while (!isPrime(next)) {
+        ++next;
+    }
+    return next;
+}
+
+int main() {
+    int n;
+
+    cout << "Enter a positive integer: ";
+    cin >> n;
+
+    if (isPrime(n)) {
+        cout << n << " is a prime number." << endl;
+        int next = nextPrime(n);
+        cout << "The next prime number greater than " << n << " is: " << next << endl;
+    } else {
+        cout << n << " is not a prime number." << endl;
+        findFactors(n);
+    }
+
+    return 0;
+}
+Q2.cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int size;
+
+    cout << "Enter the size of the array: ";
+    cin >> size;
+
+    vector<int> arr(size);
+
+    cout << "Enter " << size << " elements of the array: ";
+    for (int i = 0; i < size; ++i) {
+        cin >> arr[i];
+    }
+
+    // Reverse the array and display it
+    reverse(arr.begin(), arr.end());
+    cout << "Reversed array: ";
+    for (int i = 0; i < size; ++i) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    // Find second largest and second smallest elements
+    if (size < 2) {
+        cout << "Array must have at least two elements to find second largest and second smallest." << endl;
+        return 0;
+    }
+
+    sort(arr.begin(), arr.end());
+
+    int secondSmallest = arr[1];
+    int secondLargest = arr[size - 2];
+
+    cout << "Second smallest element: " << secondSmallest << endl;
+    cout << "Second largest element: " << secondLargest << endl;
+
+    return 0;
+}
+Q3.cpp
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include <cctype>
+using namespace std;
+
+bool isPalindrome(const string &str) {
+    int left = 0, right = str.size() - 1;
+
+    while (left < right) {
+        if (tolower(str[left]) != tolower(str[right])) {
+            return false;
+        }
+        left++;
+        right--;
+    }
+    return true;
+}
+
+void countCharacterFrequency(const string &str) {
+    unordered_map<char, int> freq;
+    
+    for (char ch : str) {
+        if (isalpha(ch)) {
+            freq[tolower(ch)]++;
+        }
+    }
+
+    cout << "Character frequencies (case insensitive):\n";
+    for (const auto &pair : freq) {
+        cout << pair.first << ": " << pair.second << endl;
+    }
+}
+
+void replaceVowelsWithChar(string &str, char replacement) {
+    for (char &ch : str) {
+        if (tolower(ch) == 'a' || tolower(ch) == 'e' || tolower(ch) == 'i' || 
+            tolower(ch) == 'o' || tolower(ch) == 'u') {
+            ch = replacement;
+        }
+    }
+}
+
+int main() {
+    string str;
+
+    cout << "Enter a string: ";
+    getline(cin, str);
+
+    if (isPalindrome(str)) {
+        cout << "The string is a palindrome." << endl;
+    } else {
+        cout << "The string is not a palindrome." << endl;
+    }
+
+    countCharacterFrequency(str);
+
+    char replacement;
+    cout << "Enter a character to replace vowels: ";
+    cin >> replacement;
+    replaceVowelsWithChar(str, replacement);
+    cout << "Modified string (vowels replaced): " << str << endl;
+
+    return 0;
+}
+Q4.cpp
+#include <iostream>
+using namespace std;
+
+void generateSpiral(int n) {
+    int matrix[n][n];
+
+    int top = 0, bottom = n - 1, left = 0, right = n - 1;
+    int num = 1;
+
+    while (top <= bottom && left <= right) {
+        for (int i = left; i <= right; i++) {
+            matrix[top][i] = num++;
+        }
+        top++;
+
+        for (int i = top; i <= bottom; i++) {
+            matrix[i][right] = num++;
+        }
+        right--;
+
+        if (top <= bottom) {
+            for (int i = right; i >= left; i--) {
+                matrix[bottom][i] = num++;
+            }
+            bottom--;
+        }
+
+        if (left <= right) {
+            for (int i = bottom; i >= top; i--) {
+                matrix[i][left] = num++;
+            }
+            left++;
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    int n;
+    cout << "Enter the size of the matrix: ";
+    cin >> n;
+
+    generateSpiral(n);
+    return 0;
+}
+Q5.cpp
+#include <iostream>
+using namespace std;
+
+void rotateMatrix90Degrees(int n, int matrix[][10]) {
+    for (int i = 0; i < n; i++) {
+        for (int j = i; j < n; j++) {
+            swap(matrix[i][j], matrix[j][i]);
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        int start = 0, end = n - 1;
+        while (start < end) {
+            swap(matrix[i][start], matrix[i][end]);
+            start++;
+            end--;
+        }
+    }
+}
+
+void printMatrix(int n, int matrix[][10]) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    int n;
+    cout << "Enter the size of the matrix: ";
+    cin >> n;
+    
+    int matrix[10][10];
+    
+    cout << "Enter the elements of the matrix:" << endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cin >> matrix[i][j];
+        }
+    }
+
+    cout << "Original Matrix:" << endl;
+    printMatrix(n, matrix);
+
+    rotateMatrix90Degrees(n, matrix);
+
+    cout << "Matrix after 90-degree rotation:" << endl;
+    printMatrix(n, matrix);
+
+    return 0;
+}
