@@ -311,4 +311,237 @@ cin>>a>>b>>c>>d;
 cout<<(a^b+c&d);
 return 0;
 }
+Q16.cpp
+#include <iostream>
+using namespace std;
+bool opposite(int a,int b){
+    return a^b<0;
+    
+}
+
+int main() {
+    int a,b;
+    cin>>a>>b;
+    if (opposite(a,b))
+    cout<<"yes";
+    else
+    cout<<"no";
+    
+    return 0;
+}
+
+Q17.cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    float a,b,r,q;
+    r=0.0;
+    q=0.0;
+    cout<<"enter a& b:";
+    cin>>a>>b;
+    if(a==0.0)
+    cout<<"answer = 0";
+    else if(b==0.0)
+    cout<<"not defined";
+    else
+    {while(a>=b){
+        a-=b;
+        q++;
+    }
+    cout<<q;
+    }
+    
+    
+
+    return 0;
+}
+Q18.cpp
+#include<iostream>
+using namespace std;
+
+int circularLeftShift(int num, int positions) {
+    int bitCount = sizeof(num) * 8;
+    return (num << positions) | (num >> (bitCount - positions));
+}
+
+int circularRightShift(int num, int positions) {
+    int bitCount = sizeof(num) * 8;
+    return (num >> positions) | (num << (bitCount - positions));
+}
+
+int main() {
+    int num, leftShiftPos, rightShiftPos;
+
+    cout << "Enter an integer: ";
+    cin >> num;
+    
+    cout << "Enter the number of positions to shift for left and right shifts: ";
+    cin >> leftShiftPos >> rightShiftPos;
+
+    int leftShifted = circularLeftShift(num, leftShiftPos);
+    int rightShifted = circularRightShift(num, rightShiftPos);
+
+    cout << "Original number: " << num << endl;
+    cout << "After circular left shift by " << leftShiftPos << " positions: " << leftShifted << endl;
+    cout << "After circular right shift by " << rightShiftPos << " positions: " << rightShifted << endl;
+
+    return 0;
+}
+
+Q19.cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a;
+    cout<<"enter grade out of 10:";
+    cin>>a;
+    switch(a){
+        case 10:cout<<"A+";
+        break;
+        case 9:cout<<"A";
+        break;
+        case 8:cout<<"B+";
+        break;
+        case 7:cout<<"B";
+        break;
+        case 6:cout<<"C+";
+        break;
+        case 5:cout<<"C";
+        break;
+        default:cout<<"Enter correct Number";
+        
+    
+    }
+
+    return 0;
+}
+Q20.cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a;
+    float b,c;
+    cout<<"enter numbers:";
+    cin>>b>>c;
+    cout<<"Menu:\n";
+    cout<<"1. Addition\n";
+    cout<<"2. Subtraction\n";
+    cout<<"3. Multiplication\n";
+    cout<<"4. Division\n";
+    cout<<"5. Exit\n";
+    cout<<"Enter your choice: ";
+    
+    cin>>a;
+    switch(a){
+        case 1:cout<<b+c;
+        break;
+        case 2:cout<<b-c;
+        break;
+        case 3:cout<<b*c;
+        break;
+        case 4:cout<<b/c;
+        break;
+        case 5:exit(0);
+        break;
+        default:cout<<"Enter correct operation";
+        
+    
+    }
+
+    return 0;
+}
+Q21.cpp
+#include<iostream>
+using namespace std;
+int main(){
+    int year;
+    cout<<"Enter a year: ";
+    cin>>year;
+    if(year % 4 == 0){
+        if(year % 100 == 0){
+            if(year % 400 == 0)
+                cout<<year<<" is a leap year."<<endl;
+            else
+                cout<<year<<" is not a leap year."<<endl;
+        }else{
+            cout<<year<<" is a leap year."<<endl;
+        }
+    }else{
+        cout<<year<<" is not a leap year."<<endl;
+    }
+    return 0;
+}
+Q22.cpp
+#include<iostream>
+using namespace std;
+int main(){
+    int n, a = 0, b = 1, c;
+    cout << "Enter the number of terms: ";
+    cin >> n;
+    cout << "Fibonacci Series: ";
+    for(int i = 1; i <= n; i++){
+        if(i == 1) cout << a << " ";
+        else if(i == 2) cout << b << " ";
+        else {
+            c = a + b;
+            a = b;
+            b = c;
+            cout << c << " ";
+        }
+    }
+    cout << endl;
+    return 0;
+}
+
+Q23.cpp
+#include<iostream>
+using namespace std;
+int main(){
+    int num, i = 2, flag = 0;
+    cout << "Enter a number: ";
+    cin >> num;
+    if(num <= 1){
+        cout << num << " is not a prime number." << endl;
+    }else{
+        while(i <= num / 2){
+            if(num % i == 0){
+                flag = 1;
+                break;
+            }
+            i++;
+        }
+        if(flag == 0)
+            cout << num << " is a prime number." << endl;
+        else
+            cout << num << " is not a prime number." << endl;
+    }
+    return 0;
+}
+Q24.cpp
+#include <iostream>
+using namespace std;
+int fact(int a)
+{int b=1,c=1;
+do{b=b*c;
+c++;
+
+    
+}while(c<=a);
+return b;}
+
+int main() {
+    int a;
+    cout<<"enter no :";
+    cin>>a;
+    cout<<fact(a);
+    
+    
+
+    return 0;
+}
+
+
 
